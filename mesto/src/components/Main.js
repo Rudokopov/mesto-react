@@ -3,7 +3,7 @@ import { api } from "../utils/Api";
 import Card from "./Card";
 
 function Main(props) {
-  const { onEditProfile, onAvatarPopup, onPlacePopup } = props;
+  const { onEditProfile, onAvatarPopup, onPlacePopup, onCardClick } = props;
 
   const [userName, setUserName] = React.useState("");
   const [userDescription, setUserDescription] = React.useState("");
@@ -57,7 +57,7 @@ function Main(props) {
       </section>
       <section className="cards">
         {cards.map((card) => (
-          <Card key={card._id} card={card} />
+          <Card key={card._id} card={card} onCardClick={onCardClick} />
         ))}
       </section>
     </main>
