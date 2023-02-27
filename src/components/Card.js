@@ -1,5 +1,4 @@
-function Card(props) {
-  const { card, onCardClick } = props;
+function Card({ card, onCardClick }) {
   return (
     <div className="card">
       <img

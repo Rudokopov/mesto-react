@@ -2,9 +2,7 @@ import React from "react";
 import { api } from "../utils/Api";
 import Card from "./Card";
 
-function Main(props) {
-  const { onEditProfile, onAvatarPopup, onPlacePopup, onCardClick } = props;
-
+function Main({ onEditProfile, onAvatarPopup, onPlacePopup, onCardClick }) {
   const [userName, setUserName] = React.useState("");
   const [userDescription, setUserDescription] = React.useState("");
   const [userAvatar, setUserAvatar] = React.useState("");
@@ -17,8 +15,7 @@ function Main(props) {
         setUserName(userData.name);
         setUserDescription(userData.about);
         setUserAvatar(userData.avatar);
-        setCards(cards)
-
+        setCards(cards);
       })
       .catch((err) => console.log(err));
   });

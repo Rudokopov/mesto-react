@@ -13,13 +13,12 @@ function App() {
 
   const [isPlacePopupOpen, setPlacePopupOpen] = React.useState(false);
 
-  const [selectedCard, setSelectedCard] = React.useState({})
-
+  const [selectedCard, setSelectedCard] = React.useState({});
 
   const handleCardClick = (card) => {
-    console.log('im work')
-    setSelectedCard(card)
-  }
+    console.log("im work");
+    setSelectedCard(card);
+  };
 
   const handleEditPopupOpen = () => {
     setEditProfilePopupOpen(!isEditProfilePopupOpen);
