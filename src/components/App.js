@@ -31,9 +31,13 @@ function App() {
     setPlacePopupOpen(!isPlacePopupOpen);
   };
 
-  // const handleClosePopup = () => {
-// Сделать универсальную функцию для закрытия попапов
-  // }
+  const handleClosePopup = () => {
+    const openedPopup = document.getElementsByClassName("popup_opened");
+    const currentPopup = openedPopup[0];
+    if (currentPopup) {
+      currentPopup.classList.remove("popup_opened");
+    }
+  };
 
   return (
     <>
@@ -45,7 +49,7 @@ function App() {
         onCardClick={(card) => handleCardClick(card)}
       />
       <PopupWithForm
-        onClose={handleEditPopupOpen}
+        onClose={handleClosePopup}
         isOpen={isEditProfilePopupOpen}
         title="Редактировать профиль"
         name="edit"
@@ -75,11 +79,11 @@ function App() {
         <span className="description-error error-message"></span>
       </PopupWithForm>
       <PopupWithForm
-        onClose={handleAvatarPopupOpen}
+        onClose={handleClosePopup}
         isOpen={isAvatarPopupOpen}
         title="Обновить аватар"
         name="avatar"
-        btnName={'Сохранить'}
+        btnName={"Сохранить"}
       >
         <input
           name="link"
@@ -92,11 +96,11 @@ function App() {
         <span className="imageAvatar-error error-message"></span>
       </PopupWithForm>
       <PopupWithForm
-        onClose={handlePlacePopupOpen}
+        onClose={handleClosePopup}
         isOpen={isPlacePopupOpen}
         title="Новое место"
         name="place"
-        btnName={'Создать'}
+        btnName={"Создать"}
       >
         <input
           name="name"
@@ -120,7 +124,7 @@ function App() {
         <span className="image-error error-message"></span>
       </PopupWithForm>
       <Footer />
-      <ImagePopup onClose={() => handleCardClick({})} isOpen={selectedCard} />
+      <ImagePopup onClose={() => handleClosePopup({})} isOpen={selectedCard} />
     </>
   );
 }
