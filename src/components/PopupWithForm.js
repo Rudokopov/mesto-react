@@ -1,4 +1,4 @@
-function PopupWithForm({ title, name, isOpen, children, onClose }) {
+function PopupWithForm({ title, name, btnName, isOpen, children, onClose }) {
   return (
     <div className={isOpen ? `popup popup_opened` : `popup`}>
       <div className="popup__container">
@@ -15,6 +15,13 @@ function PopupWithForm({ title, name, isOpen, children, onClose }) {
           noValidate
         >
           {children}
+          <input
+          name="submit"
+          type="submit"
+          value={btnName}
+          className="popup__form-submtit"
+          id="popup__form-submtit popup__form-submtit-profile-edit"
+        />
         </form>
       </div>
     </div>

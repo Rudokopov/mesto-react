@@ -16,7 +16,6 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({});
 
   const handleCardClick = (card) => {
-    console.log("im work");
     setSelectedCard(card);
   };
 
@@ -32,6 +31,10 @@ function App() {
     setPlacePopupOpen(!isPlacePopupOpen);
   };
 
+  // const handleClosePopup = () => {
+// Сделать универсальную функцию для закрытия попапов
+  // }
+
   return (
     <>
       <Header />
@@ -46,6 +49,7 @@ function App() {
         isOpen={isEditProfilePopupOpen}
         title="Редактировать профиль"
         name="edit"
+        btnName="Сохранить"
       >
         <input
           name="name"
@@ -69,19 +73,13 @@ function App() {
           maxLength="200"
         />
         <span className="description-error error-message"></span>
-        <input
-          name="submit"
-          type="submit"
-          value="Сохранить"
-          className="popup__form-submtit"
-          id="popup__form-submtit popup__form-submtit-profile-edit"
-        />
       </PopupWithForm>
       <PopupWithForm
         onClose={handleAvatarPopupOpen}
         isOpen={isAvatarPopupOpen}
         title="Обновить аватар"
         name="avatar"
+        btnName={'Сохранить'}
       >
         <input
           name="link"
@@ -92,19 +90,13 @@ function App() {
           id="imageAvatar"
         />
         <span className="imageAvatar-error error-message"></span>
-        <input
-          name="submit"
-          type="submit"
-          value="Сохранить"
-          className="popup__form-submtit popup__form-submtit-avatar"
-          id="popup__form-submtit popup__form-submtit-avatar"
-        />
       </PopupWithForm>
       <PopupWithForm
         onClose={handlePlacePopupOpen}
         isOpen={isPlacePopupOpen}
         title="Новое место"
         name="place"
+        btnName={'Создать'}
       >
         <input
           name="name"
@@ -126,13 +118,6 @@ function App() {
           id="image"
         />
         <span className="image-error error-message"></span>
-        <input
-          name="submit"
-          type="submit"
-          value="Создать"
-          className="popup__form-submtit popup__form-submtit-place"
-          id="popup__form-submtit popup__form-submtit-place"
-        />
       </PopupWithForm>
       <Footer />
       <ImagePopup onClose={() => handleCardClick({})} isOpen={selectedCard} />

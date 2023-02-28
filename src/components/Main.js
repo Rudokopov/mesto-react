@@ -18,7 +18,7 @@ function Main({ onEditProfile, onAvatarPopup, onPlacePopup, onCardClick }) {
         setCards(cards);
       })
       .catch((err) => console.log(err));
-  });
+  }, []);
 
   return (
     <main className="content">
