@@ -20,23 +20,22 @@ function App() {
   };
 
   const handleEditPopupOpen = () => {
-    setEditProfilePopupOpen(!isEditProfilePopupOpen);
+    setEditProfilePopupOpen(true);
   };
 
   const handleAvatarPopupOpen = () => {
-    setAvatarPopupOpen(!isAvatarPopupOpen);
+    setAvatarPopupOpen(true);
   };
 
   const handlePlacePopupOpen = () => {
-    setPlacePopupOpen(!isPlacePopupOpen);
+    setPlacePopupOpen(true);
   };
 
   const handleClosePopup = () => {
-    const openedPopup = document.getElementsByClassName("popup_opened");
-    const currentPopup = openedPopup[0];
-    if (currentPopup) {
-      currentPopup.classList.remove("popup_opened");
-    }
+    setSelectedCard({})
+    setAvatarPopupOpen(false)
+    setEditProfilePopupOpen(false)
+    setPlacePopupOpen(false)
   };
 
   return (
