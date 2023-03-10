@@ -1,31 +1,25 @@
 import React from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { api } from "../utils/Api";
 import Card from "./Card";
+import { CurrentUserCardsContext } from "../contexts/CurrentUserCardsContext";
 
-function Main({ onEditProfile, onAvatarPopup, onPlacePopup, onCardClick }) {
-  const [userName, setUserName] = React.useState("");
-  const [userDescription, setUserDescription] = React.useState("");
-  const [userAvatar, setUserAvatar] = React.useState("");
-
-  const [cards, setCards] = React.useState([]);
-
-  React.useEffect(() => {
-    Promise.all([api.getInitialCards(), api.getProfileInfo()])
-      .then(([cards, userData]) => {
-        setUserName(userData.name);
-        setUserDescription(userData.about);
-        setUserAvatar(userData.avatar);
-        setCards(cards);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+function Main({
+  onEditProfile,
+  onAvatarPopup,
+  onPlacePopup,
+  onCardClick,
+  onCardLike,
+}) {
+  const currentUser = React.useContext(CurrentUserContext);
+  const userCard = React.useContext(CurrentUserCardsContext);
 
   return (
     <main className="content">
       <section className="profile">
         <div className="profile__avatar-wrap">
           <img
-            src={userAvatar}
+            src={currentUser.avatar}
             alt="Аватар пользователя"
             className="profile__avatar"
           />
@@ -42,8 +36,8 @@ function Main({ onEditProfile, onAvatarPopup, onPlacePopup, onCardClick }) {
             className="profile__edit-button"
             onClick={onEditProfile}
           ></button>
-          <h1 className="profile__user-name">{userName}</h1>
-          <p className="profile__user-description">{userDescription}</p>
+          <h1 className="profile__user-name">{currentUser.name}</h1>
+          <p className="profile__user-description">{currentUser.about}</p>
         </div>
         <button
           type="button"
@@ -53,8 +47,13 @@ function Main({ onEditProfile, onAvatarPopup, onPlacePopup, onCardClick }) {
         ></button>
       </section>
       <section className="cards">
-        {cards.map((card) => (
-          <Card key={card._id} card={card} onCardClick={onCardClick} />
+        {userCard.map((card) => (
+          <Card
+            key={card._id}
+            card={card}
+            onCardClick={onCardClick}
+            onCardLike={onCardLike}
+          />
         ))}
       </section>
     </main>

@@ -29,7 +29,7 @@ class Api {
 
   addNewCard({ name, image }) {
     return this._request(`${this._url}/cards`, {
-      method: 'POST',
+      method: "POST",
       headers: this._headers,
       body: JSON.stringify({
         name: name,
@@ -46,7 +46,7 @@ class Api {
 
   changeProfileInfo({ user, description }) {
     return this._request(`${this._url}/users/me`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name: user,
@@ -57,28 +57,28 @@ class Api {
 
   deleteCard(id) {
     return this._request(`${this._url}/cards/${id}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: this._headers,
     });
   }
 
-  likeCard(id) {
-    return this._request(`${this._url}/cards/${id._id}/likes`, {
-      method: 'PUT',
+  likeCard(card) {
+    return this._request(`${this._url}/cards/${card._id}/likes`, {
+      method: "PUT",
       headers: this._headers,
     });
   }
 
-  deleteLike(id) {
-    return this._request(`${this._url}/cards/${id._id}/likes`, {
-      method: 'DELETE',
+  deleteLike(card) {
+    return this._request(`${this._url}/cards/${card._id}/likes`, {
+      method: "DELETE",
       headers: this._headers,
     });
   }
 
   setNewAvatar({ imageAvatar }) {
     return this._request(`${this._url}/users/me/avatar`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         avatar: imageAvatar,
@@ -88,11 +88,11 @@ class Api {
 }
 
 const api = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-58',
+  url: "https://mesto.nomoreparties.co/v1/cohort-58",
   headers: {
-    authorization: '0aba71cc-fce9-4c39-b3b0-8b4459f050db',
-    'Content-Type': 'application/json',
+    authorization: "0aba71cc-fce9-4c39-b3b0-8b4459f050db",
+    "Content-Type": "application/json",
   },
 });
 
-export {api} 
+export { api };

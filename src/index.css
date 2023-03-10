@@ -43,4 +43,5 @@
 @import url(./blocks/popup/__form-accept-button/popup__form-accept-button.css);
 @import url(./blocks/profile/__avatar-wrap-button/profile__avatar-wrap-button.css);
 @import url(./blocks/profile/__avatar-wrap/profile__avatar-wrap.css);
+@import url(./blocks/disabled/disabled-element.css);
 
