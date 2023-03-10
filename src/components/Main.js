@@ -10,6 +10,8 @@ function Main({
   onPlacePopup,
   onCardClick,
   onCardLike,
+  onCardDelete,
+  avatarRef,
 }) {
   const currentUser = React.useContext(CurrentUserContext);
   const userCard = React.useContext(CurrentUserCardsContext);
@@ -19,6 +21,7 @@ function Main({
       <section className="profile">
         <div className="profile__avatar-wrap">
           <img
+            ref={avatarRef}
             src={currentUser.avatar}
             alt="Аватар пользователя"
             className="profile__avatar"
@@ -53,6 +56,7 @@ function Main({
             card={card}
             onCardClick={onCardClick}
             onCardLike={onCardLike}
+            onCardDelete={onCardDelete}
           />
         ))}
       </section>

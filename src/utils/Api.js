@@ -44,12 +44,12 @@ class Api {
     });
   }
 
-  changeProfileInfo({ user, description }) {
+  changeProfileInfo({ name, description }) {
     return this._request(`${this._url}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        name: user,
+        name,
         about: description,
       }),
     });

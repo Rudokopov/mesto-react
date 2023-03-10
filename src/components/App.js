@@ -7,6 +7,8 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { CurrentUserCardsContext } from "../contexts/CurrentUserCardsContext";
+import EditProfilePopup from "./EditProfilePopup";
+import EditAvattarPopup from "./EditAvatarPopup";
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
@@ -17,6 +19,8 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState("");
   const [cards, setCards] = React.useState([]);
+
+  const avatarRef = React.useRef();
 
   React.useEffect(() => {
     Promise.all([api.getProfileInfo(), api.getInitialCards()]).then(
@@ -47,7 +51,22 @@ function App() {
     }
   }
 
-  function handleCardDelete(card) {}
+  function handleUpdateUser({ name, description }) {
+    api.changeProfileInfo({ name, description }).then((state) => {
+      setCurrentUser(state);
+      handleClosePopup();
+    });
+  }
+
+  function handleCardDelete(id) {
+    api
+      .deleteCard(id)
+      .then(setCards((cards) => cards.filter((q) => q._id !== id)));
+  }
+
+  function handleAvatarChange({ imageAvatar }) {
+    api.setNewAvatar({ imageAvatar });
+  }
 
   const handleCardClick = (card) => {
     setSelectedCard(card);
@@ -84,54 +103,19 @@ function App() {
             onCardClick={(card) => handleCardClick(card)}
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
+            avatarRef={avatarRef}
           />
-          <PopupWithForm
-            onClose={handleClosePopup}
+          <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
-            title="Редактировать профиль"
-            name="edit"
-            btnName="Сохранить"
-          >
-            <input
-              name="name"
-              placeholder="Имя"
-              required
-              type="text"
-              className="popup__form-input popup__form-user-name"
-              id="user"
-              minLength="2"
-              maxLength="40"
-            />
-            <span className="user-error error-message"></span>
-            <input
-              name="name"
-              placeholder="Описание"
-              required
-              type="text"
-              className="popup__form-input popup__form-user-description"
-              id="description"
-              minLength="2"
-              maxLength="200"
-            />
-            <span className="description-error error-message"></span>
-          </PopupWithForm>
-          <PopupWithForm
             onClose={handleClosePopup}
+            onUpdateUser={handleUpdateUser}
+          />
+          <EditAvattarPopup
             isOpen={isAvatarPopupOpen}
-            title="Обновить аватар"
-            name="avatar"
-            btnName={"Сохранить"}
-          >
-            <input
-              name="link"
-              placeholder="Ссылка на картинку"
-              required
-              type="url"
-              className="popup__form-input popup__form-avatar-link"
-              id="imageAvatar"
-            />
-            <span className="imageAvatar-error error-message"></span>
-          </PopupWithForm>
+            onClose={handleClosePopup}
+            onEditAvatar={handleAvatarChange}
+            avatarRef={avatarRef}
+          />
           <PopupWithForm
             onClose={handleClosePopup}
             isOpen={isPlacePopupOpen}
