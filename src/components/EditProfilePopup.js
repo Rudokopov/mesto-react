@@ -48,7 +48,7 @@ function EditProfilePopup(props) {
     >
       <input
         name="name"
-        value={name}
+        value={name || ""}
         placeholder="Имя"
         required
         type="text"
@@ -61,7 +61,7 @@ function EditProfilePopup(props) {
       <span className="user-error error-message"></span>
       <input
         name="name"
-        value={description}
+        value={description || ""}
         placeholder="Описание"
         required
         type="text"
