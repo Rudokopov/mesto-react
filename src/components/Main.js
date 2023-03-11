@@ -1,8 +1,5 @@
 import React from "react";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import { api } from "../utils/Api";
 import Card from "./Card";
-import { CurrentUserCardsContext } from "../contexts/CurrentUserCardsContext";
 
 function Main({
   onEditProfile,
@@ -11,17 +8,14 @@ function Main({
   onCardClick,
   onCardLike,
   onCardDelete,
-  avatarRef,
+  cards,
+  currentUser,
 }) {
-  const currentUser = React.useContext(CurrentUserContext);
-  const userCard = React.useContext(CurrentUserCardsContext);
-
   return (
     <main className="content">
       <section className="profile">
         <div className="profile__avatar-wrap">
           <img
-            ref={avatarRef}
             src={currentUser.avatar}
             alt="Аватар пользователя"
             className="profile__avatar"
@@ -50,7 +44,7 @@ function Main({
         ></button>
       </section>
       <section className="cards">
-        {userCard.map((card) => (
+        {cards.map((card) => (
           <Card
             key={card._id}
             card={card}
