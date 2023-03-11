@@ -20,7 +20,6 @@ function PopupWithForm({
         <form
           name={`form-${name}`}
           className={`popup__form popup__form-${name}`}
-          noValidate
           onSubmit={onSubmit}
         >
           {children}

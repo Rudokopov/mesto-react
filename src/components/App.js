@@ -1,4 +1,5 @@
 import React from "react";
+// Да, спасибо, но мне визуально приятнее через React... делать
 import { api } from "../utils/Api";
 import Header from "./Header";
 import Main from "./Main";
@@ -17,7 +18,7 @@ function App() {
   const [isAvatarPopupOpen, setAvatarPopupOpen] = React.useState(false);
   const [isPlacePopupOpen, setPlacePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
-  const [currentUser, setCurrentUser] = React.useState("");
+  const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
@@ -25,7 +26,6 @@ function App() {
       ([userData, cards]) => {
         setCurrentUser(userData);
         setCards(cards);
-        // Проблема при распарсе карточек на клиенте
       }
     );
   }, []);
@@ -35,45 +35,61 @@ function App() {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
     // Отправляем запрос в API и получаем обновлённые данные карточки
     if ((card, !isLiked)) {
-      api.likeCard(card).then((newCard) => {
-        setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
-        );
-      });
+      api
+        .likeCard(card)
+        .then((newCard) => {
+          setCards((state) =>
+            state.map((c) => (c._id === card._id ? newCard : c))
+          );
+        })
+        .catch((err) => console.log(err));
     } else {
-      api.deleteLike(card).then((newCard) => {
-        setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
-        );
-      });
+      api
+        .deleteLike(card)
+        .then((newCard) => {
+          setCards((state) =>
+            state.map((c) => (c._id === card._id ? newCard : c))
+          );
+        })
+        .catch((err) => console.log(err));
     }
   };
 
   const handleUpdateUser = ({ name, description }) => {
-    api.changeProfileInfo({ name, description }).then((state) => {
-      setCurrentUser(state);
-      handleClosePopup();
-    });
+    api
+      .changeProfileInfo({ name, description })
+      .then((state) => {
+        setCurrentUser(state);
+        handleClosePopup();
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleCardDelete = (id) => {
     api
       .deleteCard(id)
-      .then(setCards((cards) => cards.filter((q) => q._id !== id)));
+      .then(setCards((cards) => cards.filter((q) => q._id !== id)))
+      .catch((err) => console.log(err));
   };
 
   const handleAvatarChange = ({ imageAvatar }) => {
-    api.setNewAvatar({ imageAvatar }).then((result) => {
-      setCurrentUser(result);
-      handleClosePopup();
-    });
+    api
+      .setNewAvatar({ imageAvatar })
+      .then((result) => {
+        setCurrentUser(result);
+        handleClosePopup();
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleAddPlaceSubmit = ({ name, image }) => {
-    api.addNewCard({ name, image }).then((newCard) => {
-      setCards([newCard, ...cards]);
-      handleClosePopup();
-    });
+    api
+      .addNewCard({ name, image })
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        handleClosePopup();
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleCardClick = (card) => {

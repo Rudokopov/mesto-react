@@ -1,12 +1,7 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
-// Добрых дней, есть проблема, я глянул добрый десяток видосов на эту тему, читал ссылку что ведет в ошибке, я понял в чем проблема
-// Но не понимаю как решить
-// У нас идет неконтролируемая установка значений в инпутах при рендере приложения, а потом уже контролируемый за счет функций
-// Реакт хочет что бы был один способ, но как это обойти, я не понял. Рефом можно, но в ТЗ указано что тут должны быть контролируемые изменения
-// Я наставнику задал вопрос, но выходные, он не ответил.
-// Поэтому отправляю на интерацию так, надеюсь вы мне подскажете =)
+// Капец, так все очевидно, спасибо огромное за разъяснение, я как только не крутил эти value xD
 
 function EditProfilePopup(props) {
   const { onClose, isOpen, onUpdateUser, currentUser } = props;
@@ -16,7 +11,7 @@ function EditProfilePopup(props) {
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, isOpen]);
 
   const handleChangeName = (e) => {
     setName(e.target.value);
