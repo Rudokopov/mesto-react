@@ -13,15 +13,15 @@ function EditProfilePopup(props) {
     setDescription(currentUser.about);
   }, [currentUser]);
 
-  function handleChangeName(e) {
+  const handleChangeName = (e) => {
     setName(e.target.value);
-  }
+  };
 
-  function handleChangeDescription(e) {
+  const handleChangeDescription = (e) => {
     setDescription(e.target.value);
-  }
+  };
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
 
@@ -30,7 +30,7 @@ function EditProfilePopup(props) {
       name,
       description,
     });
-  }
+  };
 
   return (
     <PopupWithForm

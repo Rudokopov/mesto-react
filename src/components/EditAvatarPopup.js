@@ -6,14 +6,14 @@ function EditAvattarPopup(props) {
 
   const avatarInputRef = React.useRef();
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     onEditAvatar({
       imageAvatar: avatarInputRef.current.value,
     });
     e.target.reset();
-  }
+  };
 
   const { isOpen, onClose } = props;
   return (

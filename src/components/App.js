@@ -69,6 +69,13 @@ function App() {
     });
   };
 
+  const handleAddPlaceSubmit = ({ name, image }) => {
+    api.addNewCard({ name, image }).then((newCard) => {
+      setCards([newCard, ...cards]);
+      handleClosePopup();
+    });
+  };
+
   const handleCardClick = (card) => {
     setSelectedCard(card);
   };
@@ -118,7 +125,11 @@ function App() {
             onClose={handleClosePopup}
             onEditAvatar={handleAvatarChange}
           />
-          <AddPlacePopup />
+          <AddPlacePopup
+            isOpen={isPlacePopupOpen}
+            onClose={handleClosePopup}
+            onAddCard={handleAddPlaceSubmit}
+          />
           <Footer />
           <ImagePopup
             onClose={() => handleClosePopup({})}

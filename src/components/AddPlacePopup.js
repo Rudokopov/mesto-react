@@ -2,17 +2,32 @@ import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
 function AddPlacePopup(props) {
-  const { handleClosePopup, isPlacePopupOpen } = props;
+  const { isOpen, onClose, onAddCard } = props;
+  const iputNamePlaceRef = React.useRef();
+  const iputLinkPlaceRef = React.useRef();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    onAddCard({
+      name: iputNamePlaceRef.current.value,
+      image: iputLinkPlaceRef.current.value,
+    });
+    e.target.reset();
+  };
+
   return (
     <PopupWithForm
-      onClose={handleClosePopup}
-      isOpen={isPlacePopupOpen}
+      onClose={onClose}
+      isOpen={isOpen}
       title="Новое место"
       name="place"
       btnName={"Создать"}
+      onSubmit={handleSubmit}
     >
       <input
         name="name"
+        ref={iputNamePlaceRef}
         placeholder="Название"
         required
         type="text"
@@ -24,6 +39,7 @@ function AddPlacePopup(props) {
       <span className="name-error error-message"></span>
       <input
         name="link"
+        ref={iputLinkPlaceRef}
         placeholder="Ссылка на картинку"
         required
         type="url"
