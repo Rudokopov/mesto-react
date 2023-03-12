@@ -1,8 +1,6 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
-// Капец, так все очевидно, спасибо огромное за разъяснение, я как только не крутил эти value xD
-
 function EditProfilePopup(props) {
   const { onClose, isOpen, onUpdateUser, currentUser } = props;
   const [name, setName] = React.useState("");

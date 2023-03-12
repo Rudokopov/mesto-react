@@ -1,5 +1,4 @@
 import React from "react";
-// Да, спасибо, но мне визуально приятнее через React... делать
 import { api } from "../utils/Api";
 import Header from "./Header";
 import Main from "./Main";
@@ -22,12 +21,12 @@ function App() {
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
-    Promise.all([api.getProfileInfo(), api.getInitialCards()]).then(
-      ([userData, cards]) => {
+    Promise.all([api.getProfileInfo(), api.getInitialCards()])
+      .then(([userData, cards]) => {
         setCurrentUser(userData);
         setCards(cards);
-      }
-    );
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   const handleCardLike = (card) => {
